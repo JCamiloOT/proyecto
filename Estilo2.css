@@ -169,7 +169,7 @@ body {
     align-items: center; 
     padding: 0 20px; 
     position: relative;
-    top: -320px;
+    top: -570px;
     left: 100px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
 }
@@ -201,7 +201,7 @@ body {
     align-items: center; 
     padding: 0 20px; 
     position: relative;
-    top: -300px;
+    top: -550px;
     left: 100px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
 }
@@ -233,7 +233,7 @@ body {
     align-items: center; 
     padding: 0 20px; 
     position: relative;
-    top: -280px;
+    top: -530px;
     left: 100px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
 }
@@ -265,7 +265,7 @@ body {
     align-items: center; 
     padding: 0 20px; 
     position: relative;
-    top: -260px;
+    top: -500px;
     left: 100px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
 }
