@@ -9,14 +9,14 @@ body {
 }
 
 .logo-condor2-redondo {
-            width: 218px;
-            height: 212px;
+            width: 121px;
+            height: 128px;
             background-image: url(logo2.png); 
             background-size: cover;
             border-radius: 50%;
             position: relative; 
-            top: 22px; 
-            left: 670px;             
+            top: -175px; 
+            left: 800px;             
             overflow: hidden;
 
 }
