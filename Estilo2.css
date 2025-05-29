@@ -280,7 +280,7 @@ body {
     align-items: center; 
     padding: 0 20px; 
     position: relative;
-    top: -500px;
+    top: -510px;
     left: 100px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
 }
