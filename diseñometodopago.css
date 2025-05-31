@@ -1,0 +1,356 @@
+body {
+    font-family: Roca Two;
+    margin: 0;
+    padding: 20px;
+    background-color: #e0f2f7; /* Fondo azul claro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+    /* Patrón de fondo de puntos */
+    background-image: radial-gradient(circle, #bcdff7 1px, transparent 1px);
+    background-size: 30px 30px;
+    background-position: center center;
+  }
+
+  .payment-option.selected {
+            border: 2px solid #2ecc71; /* Borde verde para la opción seleccionada */
+            box-shadow: 0 0 15px rgba(46, 204, 113, 0.6); /* Sombra para resaltar */
+            background-color: rgba(46, 204, 113, 0.2); /* Fondo ligeramente verde */
+        }
+        .payment-option.selected .payment-option-icon {
+            color: #2ecc71; /* Cambia el color del icono a verde */
+        }
+        .client-details #displayNombreCliente,
+        .client-details #displayTelefonoCliente,
+        .client-details #displayDireccionCliente {
+            display: block; /* Asegura que cada uno esté en su propia línea */
+            font-size: 1em; /* Ajusta el tamaño de fuente si es necesario */
+            color: #333;
+            margin-bottom: 2px;
+        }
+
+  .payment-wrapper {
+    width: 500px; /* Ancho fijo para el contenedor principal */
+    background-color: #4a67fa; /* Fondo azul oscuro del contenedor principal */
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    padding-bottom: 30px; /* Espacio al final */
+    position: relative; /* Para la flecha y el logo */
+    overflow: hidden; /* Asegura que los elementos redondeados no se salgan */
+  }
+
+  .payment-header {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centra el título */
+    padding: 25px 20px;
+    position: relative; /* Para la flecha */
+    color: white;
+    font-size: 2em; /* Tamaño grande para el título */
+    font-weight: 800;
+    font-family: Roca Two;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .payment-header .logo {
+    position: absolute;
+    left: 20px; /* Posiciona el logo a la izquierda */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px; /* Tamaño del logo */
+    height: auto;
+  }
+
+  .payment-header .arrow {
+    position: absolute;
+    left: 80px; /* Posiciona la flecha un poco a la derecha del logo */
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2.5em; /* Tamaño de la flecha */
+    color: white;
+    cursor: pointer;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .client-info-box {
+    background-color: white;
+    border-radius: 15px;
+    margin: 0 25px 25px; /* Margen a los lados y abajo */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center; /* Alinea los elementos verticalmente */
+    gap: 20px; /* Espacio entre la imagen y el texto */
+  }
+
+  .client-avatars {
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    width: 100px; /* Ancho del contenedor de avatares */
+    height: 80px; /* Altura del contenedor de avatares */
+  }
+
+  .client-avatar-male,
+  .client-avatar-female {
+    width: 60px; /* Tamaño del avatar */
+    height: 60px;
+    border-radius: 50%;
+    background-color: #ccc; /* Color de fondo si no hay imagen */
+    overflow: hidden; /* Asegura que la imagen no se desborde */
+    border: 3px solid white; /* Borde blanco */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: absolute; /* Para superponerlos */
+  }
+
+  .client-avatar-male {
+    background-image: url('path/to/male-avatar.png'); /* Reemplaza con tu imagen de avatar masculino */
+    background-size: cover;
+    background-position: center;
+    left: 0;
+    z-index: 2; /* Para que esté encima */
+  }
+
+  .client-avatar-female {
+    background-image: url('path/to/female-avatar.png'); /* Reemplaza con tu imagen de avatar femenino */
+    background-size: cover;
+    background-position: center;
+    left: 40px; /* Superpuesto al masculino */
+    top: 20px;
+    z-index: 1;
+  }
+
+  .client-details {
+    line-height: 1.5;
+    color: #333;
+    font-size: 1.1em;
+    font-family: Roca Two;
+  }
+
+  .client-details strong {
+    font-weight: bold;
+    color: #00008b;
+    display: block; /* Cada detalle en su propia línea */
+    font-size: 1.2em;
+    margin-bottom: 5px;
+  }
+
+  .payment-methods-box {
+    background-color: #00008b; /* Azul oscuro para la sección de métodos de pago */
+    border-radius: 15px;
+    margin: 0 25px 25px;
+    padding: 20px;
+    color: white;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .payment-methods-title {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .payment-options {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start; /* Alinea los iconos/texto arriba */
+    gap: 15px;
+  }
+
+  .payment-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    width: 45%; /* Para que cada opción ocupe casi la mitad */
+  }
+
+  .payment-option-icon {
+    width: 60px; /* Tamaño del icono */
+    height: 60px;
+    background-color: rgba(255, 255, 255, 0.1); /* Fondo sutil para el icono */
+    border-radius: 10px; /* Ligeramente redondeado */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 3em; /* Tamaño del icono si es texto */
+    color: #e0f2f7; /* Color de icono */
+    /* Para iconos de imagen: */
+    /* background-image: url('path/to/icon.png'); */
+    /* background-size: contain; */
+    /* background-repeat: no-repeat; */
+    /* background-position: center; */
+  }
+
+  .payment-option-text {
+    font-size: 1.1em;
+    font-weight: bold;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  .total-section {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: white;
+    font-size: 2em;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .total-section span {
+    font-size: 1.5em; /* Tamaño para el monto total */
+    margin-left: 10px;
+    border-bottom: 2px solid white; /* Línea debajo del total */
+    padding-bottom: 5px;
+  }
+
+  .confirm-button {
+    background-color: #2ecc71; /* Verde brillante */
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.5em;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    display: block; /* Ocupa todo el ancho disponible */
+    width: calc(100% - 50px); /* Ancho del contenedor - margen horizontal */
+    margin: 0 25px 20px; /* Centra el botón con los márgenes */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .confirm-button:hover {
+    background-color: #27ae60;
+    transform: translateY(-2px);
+  }
+
+  .footer-text {
+    text-align: center;
+    color: white;
+    font-size: 1.4em;
+    font-weight: bold;
+    font-family: tabarra Sans;
+    margin-top: 20px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Media Queries para responsividad */
+  @media (max-width: 600px) {
+    .payment-wrapper {
+      width: 95%; /* Ocupa casi todo el ancho */
+      margin: 0;
+      border-radius: 15px;
+    }
+    .payment-header {
+      font-size: 1.8em;
+      padding: 20px 15px;
+    }
+    .payment-header .logo {
+      width: 40px;
+      left: 15px;
+    }
+    .payment-header .arrow {
+      left: 65px;
+      font-size: 2em;
+    }
+    .client-info-box {
+      margin: 0 15px 15px;
+      padding: 15px;
+      flex-direction: column; /* Apila el avatar y los detalles en móvil */
+      text-align: center;
+    }
+    .client-avatars {
+      margin-bottom: 15px;
+    }
+    .client-details {
+      font-size: 1em;
+    }
+    .client-details strong {
+      font-size: 1.1em;
+    }
+    .payment-methods-box {
+      margin: 0 15px 15px;
+      padding: 15px;
+    }
+    .payment-methods-title {
+      font-size: 1.5em;
+      margin-bottom: 15px;
+    }
+    .payment-options {
+      flex-direction: column; /* Apila las opciones de pago en móvil */
+      gap: 10px;
+    }
+    .payment-option {
+      width: 100%; /* Ocupa todo el ancho */
+      flex-direction: row; /* Icono y texto en fila */
+      justify-content: center;
+      gap: 15px;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.1); /* Fondo para cada opción apilada */
+      border-radius: 8px;
+    }
+    .payment-option-icon {
+      width: 50px;
+      height: 50px;
+      font-size: 2.5em;
+      margin-bottom: 0;
+    }
+    .payment-option-text {
+      font-size: 1em;
+    }
+    .total-section {
+      font-size: 1.6em;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    .total-section span {
+      font-size: 1.2em;
+    }
+    .confirm-button {
+      font-size: 1.2em;
+      padding: 12px 20px;
+      width: calc(100% - 30px);
+      margin: 0 15px 15px;
+    }
+    .footer-text {
+      font-size: 1.2em;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .payment-header {
+      font-size: 1.5em;
+    }
+    .payment-header .logo {
+      width: 35px;
+      left: 10px;
+    }
+    .payment-header .arrow {
+      left: 55px;
+      font-size: 2em;
+    }
+    .client-avatars {
+      width: 80px;
+      height: 70px;
+    }
+    .client-avatar-male,
+    .client-avatar-female {
+      width: 50px;
+      height: 50px;
+    }
+    .client-avatar-female {
+      left: 30px;
+      top: 15px;
+    }
+  }

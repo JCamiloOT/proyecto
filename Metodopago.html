@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metodo Pago</title>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="diseñometodopago.css">
+</head>
+<body>
+
+
+    <div class="payment-wrapper">
+    <div class="payment-header">
+      <img src="logo.png" alt="Logo de la Empresa" class="logo"> MÉTODO DE PAGO
+    </div>
+
+    <div class="client-info-box">
+      <div class="client-avatars">
+        <div class="client-avatar-male"></div> <div class="client-avatar-female"></div> </div>
+      <div class="client-details">
+        <strong>NOMBRE CLIENTE</strong>
+        Número Teléfono Cliente
+        Dirección Cliente
+      </div>
+    </div>
+
+    <div class="payment-methods-box">
+      <div class="payment-methods-title">Medios de pago</div>
+      <div class="payment-options">
+        <div class="payment-option">
+          <div class="payment-option-icon">&#x24; &#x24;</div> <div class="payment-option-text">Transferencia</div>
+        </div>
+        <div class="payment-option">
+          <div class="payment-option-icon">✋ &#x1F4B8;</div> <div class="payment-option-text">Contra entrega</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="total-section">
+      Total: S. <span>[Total Aquí]</span>
+    </div>
+
+    <button class="confirm-button">Confirmar el pago</button>
+
+    <p class="footer-text">@entregascondor</p>
+  </div>
+
+
+  <script>
+        // Referencias a elementos HTML para mostrar datos
+        const displayNombreCliente = document.getElementById('displayNombreCliente');
+        const displayTelefonoCliente = document.getElementById('displayTelefonoCliente');
+        const displayDireccionCliente = document.getElementById('displayDireccionCliente');
+        const displayTotalPagar = document.getElementById('displayTotalPagar');
+
+        // Referencias a las opciones de pago
+        const optionTransferencia = document.getElementById('optionTransferencia');
+        const optionContraEntrega = document.getElementById('optionContraEntrega');
+        const paymentOptions = document.querySelectorAll('.payment-option'); // Para seleccionar todas las opciones
+
+        // Botón de confirmar
+        const btnConfirmarPago = document.getElementById('btnConfirmarPago');
+
+        let loggedInUser = JSON.parse(localStorage.getItem('loggedInUser')) || null;
+        let totalFactura = parseFloat(localStorage.getItem('totalFactura')) || 0; // Se asume que el total se guarda aquí desde factura_carrito.html
+        let metodoPagoSeleccionado = localStorage.getItem('metodoPagoSeleccionado') || null;
+
+        // --- Funciones para cargar y mostrar datos ---
+
+        function cargarDatosCliente() {
+            if (loggedInUser) {
+                displayNombreCliente.textContent = loggedInUser.nombre || '[Nombre no disponible]';
+                displayTelefonoCliente.textContent = loggedInUser.telefono || '[Teléfono no disponible]';
+                displayDireccionCliente.textContent = loggedInUser.direccion || '[Dirección no disponible]';
+            } else {
+                displayNombreCliente.textContent = '[Por favor, inicia sesión o regístrate]';
+                displayTelefonoCliente.textContent = '[Por favor, inicia sesión o regístrate]';
+                displayDireccionCliente.textContent = '[Por favor, inicia sesión o regístrate]';
+                alert('No se encontraron datos de cliente. Por favor, inicia sesión o regístrate.');
+                window.location.href = 'home.html'; // Redirige al login si no hay datos
+            }
+        }
+
+        function cargarTotalPagar() {
+            // Formatear el total para mostrarlo como moneda (ej. $12.345)
+            displayTotalPagar.textContent = totalFactura.toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 });
+        }
+
+        function resaltarMetodoPago(seleccionadoElemento) {
+            paymentOptions.forEach(option => {
+                option.classList.remove('selected'); // Elimina 'selected' de todos
+            });
+            if (seleccionadoElemento) {
+                seleccionadoElemento.classList.add('selected'); // Añade 'selected' al clicado
+                metodoPagoSeleccionado = seleccionadoElemento.dataset.method;
+                localStorage.setItem('metodoPagoSeleccionado', metodoPagoSeleccionado); // Guarda la selección
+            }
+        }
+
+        // --- Event Listeners ---
+
+        optionTransferencia.addEventListener('click', () => {
+            resaltarMetodoPago(optionTransferencia);
+        });
+
+        optionContraEntrega.addEventListener('click', () => {
+            resaltarMetodoPago(optionContraEntrega);
+        });
+
+        btnConfirmarPago.addEventListener('click', () => {
+            if (!metodoPagoSeleccionado) {
+                alert('Por favor, selecciona un método de pago antes de confirmar.');
+                return;
+            }
+            if (totalFactura <= 0) {
+                 alert('El total a pagar es cero o negativo. No se puede procesar el pago.');
+                 return;
+            }
+            
+            alert(`Pago confirmado con método: ${metodoPagoSeleccionado}. Total: ${displayTotalPagar.textContent}. ¡Redirigiendo a la página de confirmación!`);
+            // Aquí, en una aplicación real, se enviaría el pago al backend.
+            // Por ahora, redirigimos a una página de "Gracias por tu compra".
+            window.location.href = 'Pagoexitoso.html'; // Asegúrate de crear este archivo
+        });
+
+        // --- Carga inicial al cargar la página ---
+        document.addEventListener('DOMContentLoaded', () => {
+            cargarDatosCliente();
+            cargarTotalPagar();
+
+            // Resaltar el método de pago si ya estaba seleccionado en localStorage
+            if (metodoPagoSeleccionado) {
+                const previoSeleccionado = document.querySelector(`.payment-option[data-method="${metodoPagoSeleccionado}"]`);
+                if (previoSeleccionado) {
+                    resaltarMetodoPago(previoSeleccionado);
+                }
+            }
+        });
+    </script>
+
+    
+</body>
+</html>
