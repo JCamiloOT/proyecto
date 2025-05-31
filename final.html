@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>finalPagina</title>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="estilofinal.css">
+</head>
+<body>
+
+
+
+    <!-- Botones-->
+ <button class="button-4" role="button">inicio</button>
+ <button class="button-5" role="button">Salir</button>
+
+
+
+  <!-- Titulo-->
+    <h1
+    style="color: white;
+     font-family: Roca Two;
+     font-size: 90px;
+     position: relative;
+     top: 115px;
+     left: 65px;
+     "
+     
+    >GRACIAS POR ELEGIRNOS</h1>
+
+    <script>
+        const btnInicio = document.getElementById('btnInicio');
+        const btnSalir = document.getElementById('btnSalir');
+
+        // Botón "inicio": Redirige a la página de login/registro (asumiendo que es tu página inicial de la aplicación)
+        btnInicio.addEventListener('click', () => {
+            window.location.href = 'login_registro.html'; // Ajusta esta URL si tu página de inicio es otra
+        });
+
+        // Botón "Salir": Cierra la ventana del navegador.
+        // Nota: Esto solo funciona en ventanas que fueron abiertas por script (ej. con window.open()).
+        // En ventanas abiertas manualmente por el usuario, el navegador generalmente lo bloquea por seguridad.
+        btnSalir.addEventListener('click', () => {
+            // Opcional: limpiar datos de usuario de localStorage al salir si quieres un "logout" completo
+            localStorage.removeItem('loggedInUser'); // Eliminar datos del usuario logueado
+            alert('¡Gracias por visitarnos! La página se cerrará.');
+            window.close(); // Intenta cerrar la ventana del navegador
+        });
+    </script>
+
+
+
+    
+    
+
+
+
+
+  <div class="logo-condor-redondo"></div>
+
+</body>
+</html>
