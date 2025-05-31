@@ -114,6 +114,81 @@
         <i class="fa fa-search search-icon"></i> 
     </div>
 
+    <script>
+        // Campos de registro
+        const regNombre = document.getElementById('regNombre');
+        const regEmail = document.getElementById('regEmail');
+        const regTelefono = document.getElementById('regTelefono');
+        const regDireccion = document.getElementById('regDireccion');
+
+        // Campos de login
+        const loginCorreo = document.getElementById('loginCorreo');
+        const loginTelefono = document.getElementById('loginTelefono');
+
+        // Botones
+        const btnCrearCuenta = document.getElementById('btnCrearCuenta');
+        const btnIniciarSesion = document.getElementById('btnIniciarSesion');
+
+        // Función para "crear cuenta" (guardar en localStorage)
+        btnCrearCuenta.addEventListener('click', () => {
+            const nombre = regNombre.value.trim();
+            const email = regEmail.value.trim();
+            const telefono = regTelefono.value.trim();
+            const direccion = regDireccion.value.trim();
+
+            if (nombre && email && telefono && direccion) {
+                const userData = {
+                    nombre: nombre,
+                    email: email,
+                    telefono: telefono,
+                    direccion: direccion
+                };
+                localStorage.setItem('loggedInUser', JSON.stringify(userData));
+                alert('Cuenta creada y sesión iniciada (simulada). Redirigiendo a productos...');
+                window.location.href = 'productos.html'; // Redirige a la página de productos
+            } else {
+                alert('Por favor, completa todos los campos para crear la cuenta.');
+            }
+        });
+
+        // Función para "iniciar sesión" (simulada)
+        btnIniciarSesion.addEventListener('click', () => {
+            const correo = loginCorreo.value.trim();
+            const telefono = loginTelefono.value.trim();
+
+            // En una aplicación real, aquí verificarías las credenciales contra una base de datos.
+            // Para esta simulación, si hay datos de usuario guardados, asumimos que se "inicia sesión".
+            // O simplemente redirigimos a la página de productos.
+            const storedUser = localStorage.getItem('loggedInUser');
+
+            if (storedUser) {
+                // Si hay un usuario registrado, asumimos que el login es exitoso
+                alert('Sesión iniciada (simulada). Redirigiendo a productos...');
+                window.location.href = 'productos.html'; // Redirige a la página de productos
+            } else if (correo && telefono) {
+                // Si no hay un usuario registrado pero se llenan los campos,
+                // podríamos simular un registro rápido o pedir que se registren primero.
+                alert('No se encontró una cuenta con esos datos. Por favor, regístrate primero.');
+            } else {
+                alert('Por favor, ingresa tu correo y teléfono para iniciar sesión.');
+            }
+        });
+
+        // Opcional: Rellenar campos si ya hay datos en localStorage (para volver a la página)
+        document.addEventListener('DOMContentLoaded', () => {
+            const storedUser = JSON.parse(localStorage.getItem('loggedInUser'));
+            if (storedUser) {
+                regNombre.value = storedUser.nombre || '';
+                regEmail.value = storedUser.email || '';
+                regTelefono.value = storedUser.telefono || '';
+                regDireccion.value = storedUser.direccion || '';
+                loginCorreo.value = storedUser.email || ''; // Rellena el campo de login también
+                loginTelefono.value = storedUser.telefono || ''; // Rellena el campo de login también
+            }
+        });
+
+    </script>
+
 
 
 
