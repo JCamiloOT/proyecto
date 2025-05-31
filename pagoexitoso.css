@@ -1,0 +1,141 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Para que el body ocupe toda la altura */
+    width: 100%;
+    overflow-x: hidden; /* Evita scroll horizontal si los elementos se salen */
+}
+
+.page-container {
+    position: relative; /* Contenedor para posicionar absolutamente los hijos */
+    width: 100%;
+    height: 100vh; /* O la altura que necesites para contener todo */
+    background-color: #ffffff; /* Un fondo general para el contenedor */
+    overflow: hidden; /* Si no quieres scroll si algo se sale, pero ten cuidado */
+    background-image: radial-gradient(circle, #bcdff7 1px, transparent 1px); /* Patrón de fondo */
+    background-size: 30px 30px;
+    background-position: center center;
+}
+
+/* Estilos para h1 (¡Gracias por su compra!) */
+.titulo-gracias {
+    color: rgb(24, 0, 241);
+    font-family: Roca Two;
+    font-size: 30px;
+    position: absolute;
+    top: 580px;
+    left: 115px;
+    max-width: 355px;
+    margin: 0;
+    text-align: center; /* Centrar el texto si ocupa max-width */
+    width: calc(100% - 230px); /* Ajustar el ancho para centrar con left */
+    transform: translateX(-50%); /* Centrar con transform */
+    left: 50%; /* Centrar con left 50% y transform */
+    top: 580px; /* Mantener la posición vertical */
+    white-space: nowrap; /* Evitar que se divida en varias líneas si no es necesario */
+}
+
+/* Estilos para h2 (Pago Exitoso) */
+.titulo-pago-exitoso {
+    color: rgb(29, 216, 12);
+    font-family: Roca Two;
+    font-size: 30px;
+    position: absolute;
+    top: 222px;
+    left: 200px;
+    max-width: 300px;
+    margin: 0;
+    text-align: center;
+    width: calc(100% - 400px); /* Ajustar el ancho para centrar con left */
+    transform: translateX(-50%); /* Centrar con transform */
+    left: 50%; /* Centrar con left 50% y transform */
+    top: 222px; /* Mantener la posición vertical */
+    white-space: nowrap;
+}
+
+.logo-condor-redondo {
+    width: 218px;
+    height: 212px;
+    background-image: url(logo.png);
+    background-size: cover;
+    border-radius: 50%;
+    position: absolute;
+    top: 380px;
+    left: 50%; /* Centrar */
+    transform: translateX(-50%); /* Centrar */
+    overflow: hidden;
+}
+
+.logo-pago {
+    width: 350px;
+    height: 210px;
+    background-image: url(pagologo.jpg);
+    background-size: cover;
+    background-position: center; /* Asegura que la imagen se vea bien */
+    position: absolute;
+    top: 10px; /* Dejar top en 10px, ajusta si es necesario */
+    left: 55%; /* Centrar */
+    transform: translateX(-50%); /* Centrar */
+    overflow: hidden;
+}
+
+.logo-segundo {
+    width: 640px;
+    height: 680px;
+    background-image: url(SegundoFondo.png);
+    background-size: cover;
+    background-position: center; /* Asegura que la imagen se vea bien */
+    border-radius: 20%;
+    position: absolute;
+    top: 20px; /* Asumiendo que es un fondo, un poco más arriba */
+    left: 50%; /* Centrar */
+    transform: translateX(-50%); /* Centrar */
+    overflow: hidden;
+    z-index: -1; /* Enviar al fondo para que no tape los textos y otros logos */
+}
+
+/* Nuevo estilo para el mensaje de redirección */
+.redireccion-mensaje {
+    position: absolute;
+    bottom: 50px; /* Ajusta la posición desde abajo */
+    left: 50%;
+    transform: translateX(-50%);
+    color: #666;
+    font-size: 1.1em;
+    font-family: Arial, sans-serif;
+}
+
+/* Media Queries para responsividad (si tus elementos absolutos causan problemas en móvil) */
+@media (max-width: 600px) {
+    .titulo-gracias, .titulo-pago-exitoso, .logo-condor-redondo, .logo-pago, .redireccion-mensaje {
+        position: relative; /* Hacerlos relativos para que fluyan */
+        top: auto;
+        left: auto;
+        transform: none;
+        width: auto;
+        max-width: 90%;
+        margin: 20px auto; /* Centrar con márgenes automáticos */
+        text-align: center;
+    }
+
+    .page-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: auto;
+        min-height: 100vh;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .logo-segundo {
+        width: 100%;
+        height: auto;
+        position: absolute; /* Podría quedarse absoluto para el fondo */
+        top: 0;
+        left: 0;
+        transform: none;
+        opacity: 0.5; /* Reducir opacidad si es un fondo muy grande */
+    }
+}

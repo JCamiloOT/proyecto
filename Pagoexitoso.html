@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago Exitoso</title>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="pagoexitoso.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Limpiar el carrito y el método de pago de localStorage
+            localStorage.removeItem('carritoProductos');
+            localStorage.removeItem('totalFactura');
+            localStorage.removeItem('metodoPagoSeleccionado');
+            // Nota: No eliminamos 'loggedInUser' para mantener la sesión del usuario
+
+            // Redirige a la página final después de 5 segundos
+            setTimeout(() => {
+                window.location.href = 'final.html'; // Asegúrate de que este archivo exista
+            }, 5000); // 5000 milisegundos = 5 segundos
+        });
+    </script>
+   
+</head>
+<body>
+
+    <div class="page-container">
+
+        <h1 class="titulo-gracias">¡Gracias por su compra!</h1>
+
+        <h2 class="titulo-pago-exitoso">Pago Exitoso</h2>
+
+        <div class="logo-condor-redondo"></div>
+        <div class="logo-pago"></div>
+        <div class="logo-segundo"></div>
+
+    </div>
+    
+</body>
+</html>
