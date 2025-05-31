@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factura</title>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="diseñofactura.css">
+</head>
+<body>
+
+    <div class="invoice-wrapper">
+    <div class="invoice-container">
+      <div class="invoice-header">
+        <h1 class="invoice-title">FACTURA</h1>
+        <img src="logo.png" alt="Logo de la Empresa" class="invoice-logo">
+      </div>
+
+      <div class="invoice-details">
+        <div><strong>Número Factura</strong> <span>01234</span></div>
+        <div><strong>Fecha Compra</strong> <span>19 de Mayo de 2025</span></div>
+        <br>
+        <div><strong>NOMBRE CLIENTE</strong> <span>[Nombre del Cliente Aquí]</span></div>
+        <div><strong>Número Teléfono Cliente</strong> <span>[Teléfono del Cliente Aquí]</span></div>
+        <div><strong>Dirección Cliente</strong> <span>[Dirección del Cliente Aquí]</span></div>
+      </div>
+
+      <table class="invoice-table">
+        <thead>
+          <tr>
+            <th>Artículos</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Artículo 1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Artículo 2</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Artículo 3</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Artículo 4</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          </tbody>
+      </table>
+
+      <div class="invoice-summary">
+        <div>
+          <span>Subtotal:</span>
+          S. <span>[Subtotal Aquí]</span>
+        </div>
+        <div>
+          <span>Impuestos (19%):</span>
+          S. <span>[Impuestos Aquí]</span>
+        </div>
+        <div class="total">
+          <span>Total:</span>
+          S. <span>[Total Aquí]</span>
+        </div>
+      </div>
+
+      <p class="invoice-thankyou">¡Gracias por su compra!</p>
+    </div>
+
+    <div class="side-buttons">
+            <button id="btnEliminarCarrito" class="side-button button-red">Eliminar del carrito</button>
+            <button id="btnSeguirComprando" class="side-button button-blue">Seguir Comprando</button>
+            <button id="btnIrAPagar" class="side-button button-green">Ir a pagar</button>
+        </div>
+    </div>
+
+    <script>
+        const TASA_IMPUESTO = 0.19; // 19% de impuestos
+        const tablaArticulosBody = document.getElementById('tablaArticulosBody');
+        const subtotalDisplay = document.getElementById('subtotalDisplay');
+        const impuestosDisplay = document.getElementById('impuestosDisplay');
+        const totalDisplay = document.getElementById('totalDisplay');
+
+        // Referencias a los SPANs donde se mostrarán los datos del cliente
+        const displayNombreCliente = document.getElementById('displayNombreCliente');
+        const displayTelefonoCliente = document.getElementById('displayTelefonoCliente');
+        const displayDireccionCliente = document.getElementById('displayDireccionCliente');
+
+        // Referencias a los botones del sidebar
+        const btnEliminar = document.getElementById('btnEliminarCarrito');
+        const btnSeguir = document.getElementById('btnSeguirComprando');
+        const btnPagar = document.getElementById('btnIrAPagar');
+
+        let carritoProductos = JSON.parse(localStorage.getItem('carritoProductos')) || []; // Recupera el carrito
+        let loggedInUser = JSON.parse(localStorage.getItem('loggedInUser')) || null; // Recupera datos del usuario logueado
+
+        // Función para cargar los datos del cliente si existen
+        function cargarDatosCliente() {
+            if (loggedInUser) {
+                displayNombreCliente.textContent = loggedInUser.nombre || '[Nombre no disponible]';
+                displayTelefonoCliente.textContent = loggedInUser.telefono || '[Teléfono no disponible]';
+                displayDireccionCliente.textContent = loggedInUser.direccion || '[Dirección no disponible]';
+            } else {
+                displayNombreCliente.textContent = '[Por favor, inicia sesión o regístrate]';
+                displayTelefonoCliente.textContent = '[Por favor, inicia sesión o regístrate]';
+                displayDireccionCliente.textContent = '[Por favor, inicia sesión o regístrate]';
+            }
+        }
+
+        // Función para rellenar la tabla y calcular totales
+        function cargarFactura() {
+            tablaArticulosBody.innerHTML = ''; // Limpiamos la tabla primero
+            let subtotal = 0;
+
+            if (carritoProductos.length === 0) {
+                const row = tablaArticulosBody.insertRow();
+                const cell = row.insertCell();
+                cell.colSpan = 4;
+                cell.textContent = 'No hay productos en el carrito.';
+                cell.style.textAlign = 'center';
+            } else {
+                carritoProductos.forEach(producto => {
+                    const row = tablaArticulosBody.insertRow();
+                    const totalProducto = producto.cantidad * producto.precio;
+                    subtotal += totalProducto;
+
+                    row.insertCell().textContent = producto.nombre;
+                    row.insertCell().textContent = producto.cantidad;
+                    row.insertCell().textContent = '$' + producto.precio.toLocaleString('es-CO');
+                    row.insertCell().textContent = '$' + totalProducto.toLocaleString('es-CO');
+                });
+            }
+
+            const impuestos = subtotal * TASA_IMPUESTO;
+            const totalFinal = subtotal + impuestos;
+
+            subtotalDisplay.textContent = subtotal.toLocaleString('es-CO');
+            impuestosDisplay.textContent = impuestos.toLocaleString('es-CO');
+            totalDisplay.textContent = totalFinal.toLocaleString('es-CO');
+        }
+
+        // --- Funcionalidad de los botones ---
+
+        // 1. Botón "Vaciar Carrito" (antes "Eliminar del carrito")
+        btnEliminar.addEventListener('click', () => {
+            if (confirm('¿Estás seguro de que quieres vaciar el carrito?')) {
+                localStorage.removeItem('carritoProductos'); // Borra los productos
+                carritoProductos = []; // Vacía el array en memoria
+                cargarFactura(); // Vuelve a cargar la tabla (ahora vacía)
+                alert('¡Carrito vaciado!');
+            }
+        });
+
+        // 2. Botón "Seguir Comprando"
+        btnSeguir.addEventListener('click', () => {
+            window.location.href = 'productos.html';
+        });
+
+        // 3. Botón "Ir a pagar"
+        btnPagar.addEventListener('click', () => {
+            // Validar que el usuario esté "logueado" (tenga datos en localStorage)
+            if (!loggedInUser || !loggedInUser.nombre || !loggedInUser.telefono || !loggedInUser.direccion) {
+                alert('Por favor, inicia sesión o regístrate para completar tus datos antes de ir a pagar.');
+                // Opcional: Redirigir a la página de login/registro si no hay datos
+                window.location.href = 'home.html';
+                return;
+            }
+            // Validar que haya productos en el carrito
+            if (carritoProductos.length === 0) {
+                alert('Tu carrito está vacío. Por favor, añade productos antes de ir a pagar.');
+                return;
+            }
+
+            // Si todo está bien, redirige a la página de pago
+            window.location.href = 'Metodopago.html';
+        });
+
+        // Ejecutar al cargar la página de la factura
+        document.addEventListener('DOMContentLoaded', () => {
+            cargarDatosCliente(); // Carga datos del cliente al inicio
+            cargarFactura(); // Carga los productos y calcula totales
+        });
+    </script>
+</body>
+</html>
