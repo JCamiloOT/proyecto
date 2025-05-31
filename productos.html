@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos</title>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="Estilo3.css">
+</head>
+<body>
+
+    <!-- Titulo-->
+
+
+    <div class="main-header">
+    <h1 class="header-title">NUESTROS PRODUCTOS</h1>
+    </div>
+    </div>
+
+
+    <div class="logo-condor3-redondo"></div>
+
+<div class="catalog-container">
+
+    <div class="product-card">
+      <div class="image-container">
+        <img src="jabonliquido.png" alt="Jabón Líquido" class="product-image">
+      </div>
+      <div class="product-title">Jabón Líquido</div>
+      <div class="product-price">$11.500</div>
+      <button class="buy-button">Comprar</button>
+    </div>
+
+    <div class="product-card">
+      <div class="image-container">
+        <img src="shampu.png" alt="Champú" class="product-image">
+      </div>
+      <div class="product-title">Champú</div>
+      <div class="product-price">$15.950</div>
+      <button class="buy-button">Comprar</button>
+    </div>
+
+    <div class="product-card">
+      <div class="image-container">
+        <img src="protesolar.png" alt="Protector Solar" class="product-image">
+      </div>
+      <div class="product-title">Protector Solar</div>
+      <div class="product-price">$25.900</div>
+      <button class="buy-button">Comprar</button>
+    </div>
+
+    <div class="product-card">
+      <div class="image-container">
+        <img src="cepillo.png" alt="Cepillo de Dientes" class="product-image">
+      </div>
+      <div class="product-title">Cepillo de Dientes</div>
+      <div class="product-price">$21.500</div>
+      <button class="buy-button">Comprar</button>
+    </div>
+
+    <div class="product-card">
+      <div class="image-container">
+        <img src="papel.png" alt="Papel Higiénico" class="product-image">
+      </div>
+      <div class="product-title">Papel Higiénico</div>
+      <div class="product-price">$17.900</div>
+      <button class="buy-button">Comprar</button>
+    </div>
+
+    <div class="product-card">
+      <div class="image-container">
+        <img src="gelducha.png" alt="Gel de Ducha" class="product-image">
+      </div>
+      <div class="product-title">Gel de Ducha</div>
+      <div class="product-price">$16.950</div>
+      <button class="buy-button">Comprar</button>
+    </div>
+
+    <div class="product-card">
+      <div class="image-container">
+        <img src="toallas.png" alt="Toallas Micelares" class="product-image">
+      </div>
+      <div class="product-title">Toallas Micelares</div>
+      <div class="product-price">$14.850</div>
+      <button class="buy-button">Comprar</button>
+    </div>
+
+    <div class="product-card">
+      <div class="image-container">
+        <img src="acondicionador.png" alt="Acondicionador" class="product-image">
+      </div>
+      <div class="product-title">Acondicionador</div>
+      <div class="product-price">$22.950</div>
+      <button class="buy-button">Comprar</button>
+    </div>
+
+    <div class="product-card">
+      <div class="image-container">
+        <img src="colgate.png" alt="Crema Dental" class="product-image">
+      </div>
+      <div class="product-title">Crema Dental</div>
+      <div class="product-price">$25.600</div>
+      <button class="buy-button">Comprar</button>
+    </div>
+
+    <div class="product-card">
+      <div class="image-container">
+        <img src="cremafeitar.png" alt="Crema para Afeitar" class="product-image">
+      </div>
+      <div class="product-title">Crema para Afeitar</div>
+      <div class="product-price">$19.750</div>
+      <button class="buy-button">Comprar</button>
+    </div>
+
+  </div>
+  <script>
+        const MAX_PRODUCTOS = 3; // Definimos el número máximo de productos para la redirección
+        let carrito = JSON.parse(localStorage.getItem('carritoProductos')) || []; // Carga el carrito del LocalStorage o crea uno vacío
+        const botonesComprar = document.querySelectorAll('.comprar-btn');
+
+        // Función para actualizar la UI (deshabilitar/resaltar productos ya en carrito)
+        function actualizarUIProductos() {
+            botonesComprar.forEach(button => {
+                const productoDiv = button.closest('.producto');
+                const nombreProducto = productoDiv.dataset.name;
+
+                // Si el producto ya está en el carrito, desactiva el botón y resáltalo
+                if (carrito.some(item => item.nombre === nombreProducto)) {
+                    button.disabled = true;
+                    button.textContent = 'Añadido';
+                    button.style.backgroundColor = '#6c757d'; // Gris para deshabilitado
+                    productoDiv.classList.add('selected'); // Añadir clase para resaltar
+                } else {
+                    // Asegurarse de que los botones estén habilitados si no están en el carrito
+                    button.disabled = false;
+                    button.textContent = 'Comprar';
+                    button.style.backgroundColor = '#4CAF50';
+                    productoDiv.classList.remove('selected');
+                }
+            });
+        }
+
+        // Ejecutar al cargar la página para reflejar el estado actual del carrito
+        actualizarUIProductos();
+
+        botonesComprar.forEach(button => {
+            button.addEventListener('click', (event) => {
+                const productoDiv = event.target.closest('.producto');
+                const nombreProducto = productoDiv.dataset.name;
+                const precioProducto = parseFloat(productoDiv.dataset.price);
+
+                // Evitar añadir el mismo producto varias veces
+                if (carrito.some(item => item.nombre === nombreProducto)) {
+                    alert('Este producto ya está en tu carrito.');
+                    return; // Sale de la función si el producto ya está
+                }
+
+                // Asegurarse de no exceder el límite si ya hay productos en el carrito de una sesión anterior
+                if (carrito.length >= MAX_PRODUCTOS) {
+                    alert(`Ya has seleccionado ${MAX_PRODUCTOS} productos. Redirigiendo a la factura.`);
+                    window.location.href = 'factura.html'; // Redirige inmediatamente
+                    return; // Sale de la función
+                }
+
+                // Añadir el producto al carrito
+                carrito.push({
+                    nombre: nombreProducto,
+                    cantidad: 1, // Por ahora, la cantidad es fija en 1
+                    precio: precioProducto
+                });
+
+                // Guarda el carrito actualizado en LocalStorage
+                localStorage.setItem('carritoProductos', JSON.stringify(carrito));
+
+                // Actualiza la interfaz del botón recién clicado
+                event.target.disabled = true;
+                event.target.textContent = 'Añadido';
+                event.target.style.backgroundColor = '#6c757d';
+                productoDiv.classList.add('selected');
+
+                // Verifica si se ha alcanzado el límite de productos para la redirección
+                if (carrito.length === MAX_PRODUCTOS) {
+                    alert(`Has seleccionado ${MAX_PRODUCTOS} productos. ¡Vamos a la factura!`);
+                    window.location.href = 'factura.html'; // Redirige a la página de la factura
+                }
+            });
+        });
+    </script>
+
+
+
+</body>
+</html>
